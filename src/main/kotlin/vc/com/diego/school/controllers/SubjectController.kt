@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import vc.com.diego.school.data.entities.Subject
+import vc.com.diego.school.data.forms.SubjectForm
+import vc.com.diego.school.data.forms.SubjectStudent
 import vc.com.diego.school.services.SubjectService
 
 @Controller
@@ -22,13 +22,12 @@ class SubjectController(
     fun findAll(): ResponseEntity<Any> = ok(this.subjectService.getAll())
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ResponseEntity<Any> {
-        try {
-            var subject = this.subjectService.getById(id)
-            return ok(subject)
-        } catch (e: Exception){
-            return notFound()
-        }
-    }
+    fun findById(@PathVariable id: Long): ResponseEntity<Any> = ok(this.subjectService.getById(id))
+
+    @PostMapping
+    fun creteSubject(@RequestBody form: SubjectForm): ResponseEntity<Any> = ok(this.subjectService.createSubject(form))
+
+    @PostMapping("/{id}")
+    fun registerStudentIntoSubject(@PathVariable id: Long, @RequestBody form: SubjectStudent): ResponseEntity<Any> = ok(this.subjectService.addStudentToClass(id, form))
 
 }

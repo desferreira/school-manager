@@ -28,6 +28,8 @@ class StudentService(
         return this.studentRepository.save(student)
     }
 
+    fun findById(id: Long): Student = this.studentRepository.getOne(id)
+
     private fun createStudentFromForm(form: StudentForm): Student {
         return Student(null, form.name, form.birthDate, form.cpf)
     }
