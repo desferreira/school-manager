@@ -1,16 +1,30 @@
 package vc.com.diego.school.data.entities
 
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToMany
+import javax.persistence.*
 
 @Entity
 class Subject(
-        @Id
-        private var id: Long,
-        private var name: String,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long,
+        var name: String,
         @ManyToMany
-        private var students: List<Student>
+        var students: MutableList<Student>
 
 ) {
+
+    fun addStudent(student: Student): List<Student> {
+        if (this.students.add(student)) {
+            return this.students
+        }
+        throw RuntimeException("Error")
+    }
+
+    fun removeStudent(student: Student): List<Student> {
+        if (this.students.remove(student)) {
+            return this.students
+        }
+        throw RuntimeException("Error")
+    }
+
+
 }
