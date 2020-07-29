@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import vc.com.diego.school.data.entities.Student
 import vc.com.diego.school.data.forms.StudentForm
 import vc.com.diego.school.repositories.IStudentRepository
+import java.util.logging.Level
 import java.util.logging.Logger
 
 @Service
@@ -16,7 +17,10 @@ class StudentService(
     private var logger = Logger.getLogger("studentService")
 
     fun getAll(): List<Student> {
-        return this.studentRepository.findAll();
+        var students = this.studentRepository.findAll()
+        logger.log(Level.INFO, students.size.toString())
+        students.stream().forEach { s -> logger.log(Level.INFO, s.toString()) }
+        return students
     }
 
     fun createStudent(form: StudentForm): Student {
