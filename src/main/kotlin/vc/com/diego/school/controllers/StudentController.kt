@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import vc.com.diego.school.data.entities.Student
 import vc.com.diego.school.data.forms.student.StudentForm
 import vc.com.diego.school.services.StudentService
@@ -23,4 +20,6 @@ class StudentController(@Autowired
     @PostMapping
     fun createStudent(@RequestBody form: StudentForm): ResponseEntity<Student> = ok(this.studentService.createStudent(form))
 
+    @PutMapping("/{id}")
+    fun updateStudent(@PathVariable id: Long, @RequestBody form: StudentForm): ResponseEntity<Any> = ok(this.studentService.updateStudent(id, form))
 }
