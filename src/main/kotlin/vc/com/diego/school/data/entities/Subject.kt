@@ -1,6 +1,7 @@
 package vc.com.diego.school.data.entities
 
 import org.springframework.http.HttpStatus
+import vc.com.diego.school.data.enum.Status
 import vc.com.diego.school.exception.HttpException
 import javax.persistence.*
 
@@ -8,7 +9,9 @@ import javax.persistence.*
 class Subject(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long?,
-        var name: String
+        var name: String,
+        var capacity: Integer,
+        var status: Status = Status.ACTIVE
 ) {
 
     @ManyToMany
@@ -26,6 +29,10 @@ class Subject(
             return this.students
         }
         throw HttpException(HttpStatus.BAD_REQUEST, Subject::class.toString(), "Error while removing student on subject with id $id")
+    }
+
+    fun hasSpace(): Boolean {
+        return this.capacity > this.students.size
     }
 
 

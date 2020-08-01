@@ -32,8 +32,15 @@ class SubjectService(
         return subject.get()
     }
 
+    fun update(form: SubjectForm, id: Long): Subject{
+        var actualSubject = this.getById(id)
+        var newSubject = this.updateSubject(actualSubject, form)
+        this.repository.save(newSubject)
+        return newSubject
+    }
+
     fun createSubject(form: SubjectForm): Subject {
-        var subject = Subject(null, form.name)
+        var subject = Subject(null, form.name, form.capacity)
         this.repository.save(subject)
         return subject
     }
@@ -41,18 +48,50 @@ class SubjectService(
     fun addStudentToClass(subjectId: Long, studentsList: SubjectStudent): List<Student> {
         val subject = this.getById(subjectId)
         var student: Student
+        if (subject.hasSpace()) {
+            for (id in studentsList.ids) {
+                student = this.studentService.findById(id)
+                subject.addStudent(student)
+            }
+            this.repository.save(subject)
+            return subject.students
+        }
+        throw HttpException(HttpStatus.BAD_REQUEST, Subject::class.toString(), "The student can't be assingned to the subject [${subject.name}]")
+    }
+
+    fun removeStudentFromClass(subjectId: Long, studentsList: SubjectStudent): List<Student> {
+        val subject = this.getById(subjectId)
+        var student: Student
         for (id in studentsList.ids){
             student = this.studentService.findById(id)
-            subject.addStudent(student)
+            subject.removeStudent(student)
         }
         this.repository.save(subject)
         return subject.students
     }
 
-    fun removeStudentFromClass(student: Student, subjectId: Long): List<Student> {
-        val subject = this.getById(subjectId)
-        subject.removeStudent(student)
-        this.repository.save(subject)
-        return subject.students
+    fun block(id: Long): Subject {
+        var subject = this.getById(id)
+        subject.status = subject.status.block()
+        return this.repository.save(subject)
     }
+
+    fun active(id: Long): Subject {
+        var subject = this.getById(id)
+        subject.status = subject.status.active()
+        return this.repository.save(subject)
+    }
+
+    fun inactive(id: Long): Subject {
+        var subject = this.getById(id)
+        subject.status = subject.status.inactive()
+        return this.repository.save(subject)
+    }
+
+    private fun updateSubject(old: Subject, new: SubjectForm): Subject {
+        old.name = new.name
+        old.capacity = new.capacity
+        return old
+    }
+
 }
