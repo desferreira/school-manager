@@ -10,10 +10,10 @@ import javax.persistence.Id
 class Student(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private var id: Long?,
-        private var name: String,
-        private var birthDate: Date,
-        private var cpf: String
+        var id: Long?,
+        var name: String,
+        var birthDate: Date,
+        var cpf: String
 ) {
     override fun toString(): String {
         return "Student(id=$id, name='$name', birthDate=$birthDate, cpf='$cpf')"
