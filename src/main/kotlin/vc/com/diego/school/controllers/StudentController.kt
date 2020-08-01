@@ -22,8 +22,8 @@ class StudentController(@Autowired
     }
 
     @PostMapping
-    fun createStudent(@RequestBody form: StudentForm): ResponseEntity<Student>{
-        return ResponseEntity.ok(this.studentService.createStudent(form))
+    fun createStudent(@RequestBody form: StudentForm): Student{
+        return this.studentService.createStudent(form)
     }
 
 }

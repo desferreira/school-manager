@@ -7,10 +7,11 @@ import javax.persistence.ManyToMany
 @Entity
 class Subject(
         @Id
-        private var id: Long,
-        private var name: String,
+        var id: Long,
+        var name: String,
         @ManyToMany
-        private var students: List<Student>
+        var students: List<Student>,
+        var capacity: Integer
 
 ) {
 }
