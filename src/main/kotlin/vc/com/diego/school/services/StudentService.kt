@@ -3,7 +3,7 @@ package vc.com.diego.school.services
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import vc.com.diego.school.data.entities.Student
-import vc.com.diego.school.data.forms.StudentForm
+import vc.com.diego.school.data.forms.student.StudentForm
 import vc.com.diego.school.repositories.IStudentRepository
 import java.util.logging.Level
 import java.util.logging.Logger

@@ -2,20 +2,22 @@ package vc.com.diego.school.controllers
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import vc.com.diego.school.data.entities.Subject
-import vc.com.diego.school.data.forms.SubjectForm
-import vc.com.diego.school.data.forms.SubjectStudent
+import vc.com.diego.school.data.forms.subject.GradeForm
+import vc.com.diego.school.data.forms.subject.SubjectForm
+import vc.com.diego.school.data.forms.subject.SubjectStudent
+import vc.com.diego.school.services.GradeService
 import vc.com.diego.school.services.SubjectService
 
 @Controller
 @RequestMapping("/api/subject")
 class SubjectController(
         @Autowired
-        val subjectService: SubjectService
+        val subjectService: SubjectService,
+        @Autowired
+        val gradeService: GradeService
 ) {
 
     @GetMapping
@@ -44,5 +46,11 @@ class SubjectController(
 
     @GetMapping("/inactive/{id}")
     fun inactiveSubject(@PathVariable id: Long): ResponseEntity<Any> = ok(this.subjectService.inactive(id))
+
+    @PutMapping("/grade/{id}")
+    fun updateGrade(@PathVariable id: Long, @RequestBody form: GradeForm): ResponseEntity<Any> = ok(this.gradeService.updateGrade(id, form))
+
+    @PostMapping("/grade")
+    fun registerGrade(@RequestBody form: GradeForm): ResponseEntity<Any> = ok(this.gradeService.registerGrade(form))
 
 }

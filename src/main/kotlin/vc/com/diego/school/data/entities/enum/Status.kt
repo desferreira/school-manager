@@ -1,4 +1,4 @@
-package vc.com.diego.school.data.enum
+package vc.com.diego.school.data.entities.enum
 
 import org.springframework.http.HttpStatus
 import vc.com.diego.school.exception.HttpException

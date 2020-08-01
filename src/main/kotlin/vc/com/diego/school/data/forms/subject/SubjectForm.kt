@@ -1,4 +1,4 @@
-package vc.com.diego.school.data.forms
+package vc.com.diego.school.data.forms.subject
 
 import org.jetbrains.annotations.NotNull
 

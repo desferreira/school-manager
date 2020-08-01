@@ -1,7 +1,7 @@
 package vc.com.diego.school.data.entities
 
 import org.springframework.http.HttpStatus
-import vc.com.diego.school.data.enum.Status
+import vc.com.diego.school.data.entities.enum.Status
 import vc.com.diego.school.exception.HttpException
 import javax.persistence.*
 

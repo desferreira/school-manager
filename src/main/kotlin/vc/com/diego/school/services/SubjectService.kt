@@ -3,13 +3,15 @@ package vc.com.diego.school.services
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import vc.com.diego.school.data.entities.Grade
 import vc.com.diego.school.data.entities.Student
 import vc.com.diego.school.data.entities.Subject
-import vc.com.diego.school.data.forms.SubjectForm
-import vc.com.diego.school.data.forms.SubjectStudent
+import vc.com.diego.school.data.forms.subject.GradeForm
+import vc.com.diego.school.data.forms.subject.SubjectForm
+import vc.com.diego.school.data.forms.subject.SubjectStudent
 import vc.com.diego.school.exception.HttpException
 import vc.com.diego.school.repositories.ISubjectRepository
-import java.lang.RuntimeException
+import java.util.logging.Level
 import java.util.logging.Logger
 
 @Service
@@ -17,7 +19,9 @@ class SubjectService(
         @Autowired
         private var repository: ISubjectRepository,
         @Autowired
-        private var studentService: StudentService
+        private var studentService: StudentService,
+        @Autowired
+        private var gradeService: GradeService
 ) {
 
     private var logger = Logger.getLogger("subjectService")
@@ -27,6 +31,7 @@ class SubjectService(
     fun getById(id: Long): Subject {
         val subject = this.repository.findById(id)
         if (subject.isEmpty()) {
+            logger.log(Level.INFO, "Subject with id [$id] does not exist")
             throw HttpException(HttpStatus.NOT_FOUND, Subject::class.toString(), "Not found Subject with id [$id]")
         }
         return subject.get()
@@ -87,7 +92,7 @@ class SubjectService(
         subject.status = subject.status.inactive()
         return this.repository.save(subject)
     }
-
+    
     private fun updateSubject(old: Subject, new: SubjectForm): Subject {
         old.name = new.name
         old.capacity = new.capacity

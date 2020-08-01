@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import vc.com.diego.school.data.entities.Student
-import vc.com.diego.school.data.forms.StudentForm
+import vc.com.diego.school.data.forms.student.StudentForm
 import vc.com.diego.school.services.StudentService
 
 @Controller

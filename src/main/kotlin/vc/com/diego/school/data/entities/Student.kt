@@ -1,6 +1,6 @@
 package vc.com.diego.school.data.entities
 
-import vc.com.diego.school.data.enum.Status
+import vc.com.diego.school.data.entities.enum.Status
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -16,7 +16,6 @@ class Student(
         var birthDate: Date,
         var cpf: String,
         var status: Status = Status.ACTIVE
-
 ) {
     override fun toString(): String {
         return "Student(id=$id, name='$name', birthDate=$birthDate, cpf='$cpf')"
