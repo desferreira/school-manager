@@ -12,7 +12,7 @@ import vc.com.diego.school.services.GradeService
 import vc.com.diego.school.services.SubjectService
 
 @Controller
-@RequestMapping("/api/subject")
+@RequestMapping("/subject")
 class SubjectController(
         @Autowired
         val subjectService: SubjectService,

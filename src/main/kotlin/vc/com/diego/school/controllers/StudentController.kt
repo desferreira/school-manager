@@ -10,7 +10,7 @@ import vc.com.diego.school.data.forms.student.StudentForm
 import vc.com.diego.school.services.StudentService
 
 @Controller
-@RequestMapping("/api/students")
+@RequestMapping("/students")
 class StudentController(@Autowired
                         val studentService: StudentService) {
 
