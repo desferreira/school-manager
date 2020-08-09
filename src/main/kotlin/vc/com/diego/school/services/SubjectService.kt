@@ -19,9 +19,7 @@ class SubjectService(
         @Autowired
         private var repository: ISubjectRepository,
         @Autowired
-        private var studentService: StudentService,
-        @Autowired
-        private var gradeService: GradeService
+        private var studentService: StudentService
 ) {
 
     private var logger = Logger.getLogger("subjectService")

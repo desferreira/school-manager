@@ -36,6 +36,13 @@ class GradeService(
         return newGrade
     }
 
+    fun getMeanGrade(id: Long): Float {
+        var grades = this.repository.findAllBySubject(id)
+        var sum = Float.MIN_VALUE
+        grades.stream().forEach { grade -> sum += grade.grade}
+        return sum/grades.size
+    }
+
     private fun updateFromForm(old: Grade, new: GradeForm): Grade {
         old.grade = new.grade
         return old

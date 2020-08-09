@@ -42,6 +42,10 @@ class StudentService(
 
     }
 
+    fun findById(id: Long): Student {
+        return this.studentRepository.getOne(id)
+    }
+
     private fun updateStudentFromForm(old: Student, new: StudentForm): Student {
         old.name = new.name
         old.cpf = new.cpf

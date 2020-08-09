@@ -53,4 +53,7 @@ class SubjectController(
     @PostMapping("/grade")
     fun registerGrade(@RequestBody form: GradeForm): ResponseEntity<Any> = ok(this.gradeService.registerGrade(form))
 
+    @GetMapping("/grade/mean/{id}")
+    fun getMeanGrade(@PathVariable id: Long): ResponseEntity<Any> = ok(this.gradeService.getMeanGrade(id))
+
 }
