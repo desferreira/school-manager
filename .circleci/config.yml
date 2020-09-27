@@ -24,6 +24,10 @@ jobs:
     steps:
       - checkout
 
+      - setup_remote_docker:
+          version: 19.03.12
+          docker_layer_caching: true
+
       # Download and cache dependencies
       - restore_cache:
           keys:
