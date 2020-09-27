@@ -34,16 +34,11 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+           
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS         
 
       - run: gradle dependencies
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
-
-      # run tests!
-      - run: gradle test
       - run: gradle build
 
       - run: docker build -t dig0w/school:$CIRCLE_BRANCH .
