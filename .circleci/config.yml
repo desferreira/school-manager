@@ -42,7 +42,7 @@ jobs:
       - run: gradle test
       - run: gradle build
 
-     - run: docker build -t dig0w/school:$CIRCLE_BRANCH .
+      - run: docker build -t dig0w/school:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push dig0w/school:$CIRCLE_BRANCH
+      - run: docker push dig0w/school:$CIRCLE_BRANCH
