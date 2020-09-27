@@ -8,8 +8,6 @@ jobs:
     filters:
       tags:
         only: /^v.*/
-      branches:
-        ignore: /.*/
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:11-jdk
@@ -32,14 +30,7 @@ jobs:
       - setup_remote_docker:
           version: 19.03.12
           docker_layer_caching: false
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-           
+          
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS         
 
       - run: gradle dependencies
