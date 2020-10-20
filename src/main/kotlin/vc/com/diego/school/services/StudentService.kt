@@ -27,6 +27,7 @@ class StudentService(
     }
 
     fun createStudent(form: StudentForm): Student {
+        logger.log(Level.INFO, "criando um estudante")
         var student = this.createStudentFromForm(form)
         return this.studentRepository.save(student)
     }
