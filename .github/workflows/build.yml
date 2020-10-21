@@ -26,4 +26,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker push dig0w/school:${GITHUB_SHA::8} dig0w/school:${GITHUB_SHA::8}
+        run: docker push dig0w/school:${GITHUB_SHA::8}
