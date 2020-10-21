@@ -17,7 +17,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Build docker image
-        run: docker build -t school:${GITHUB_SHA::8} .
+        run: docker build -t dig0w/school:${GITHUB_SHA::8} .
+      - name: Build docker image
+        run: docker tag dig0w/school:${GITHUB_SHA::8} dig0w/school:${GITHUB_SHA::8}
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
